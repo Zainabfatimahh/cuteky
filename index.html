@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <title>cuteky</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Quicksand:wght@400;500;600;700&display=swap');
@@ -18,11 +19,14 @@
     --shadow: rgba(107,74,90,0.18);
   }
 
-  *{box-sizing:border-box;}
+  *{box-sizing:border-box; -webkit-tap-highlight-color: transparent;}
+
+  html{ -webkit-text-size-adjust:100%; }
 
   body{
     margin:0;
     min-height:100vh;
+    min-height:100dvh;
     background:
       radial-gradient(circle at 15% 20%, #FFE3EE 0%, transparent 45%),
       radial-gradient(circle at 85% 80%, #E3D8FA 0%, transparent 45%),
@@ -31,8 +35,9 @@
     display:flex;
     align-items:center;
     justify-content:center;
-    padding:24px;
+    padding: clamp(12px, 4vw, 24px);
     color:var(--mauve);
+    overflow-x:hidden;
   }
 
   .card{
@@ -40,17 +45,18 @@
     width:100%;
     max-width:460px;
     background:#FFFDFB;
-    border-radius:32px;
+    border-radius:clamp(20px, 6vw, 32px);
     border:3px dashed var(--pink);
-    padding:28px 26px 32px;
+    padding: clamp(22px, 6vw, 28px) clamp(16px, 5vw, 26px) clamp(26px, 6vw, 32px);
     box-shadow: 0 18px 40px var(--shadow);
     text-align:center;
     overflow:visible;
+    margin-top: 28px;
   }
 
   .brand{
     font-family:'Baloo 2', cursive;
-    font-size:2.1rem;
+    font-size: clamp(1.6rem, 6vw, 2.1rem);
     font-weight:800;
     color:var(--bubble);
     letter-spacing:1px;
@@ -59,7 +65,7 @@
   }
 
   .tagline{
-    font-size:0.85rem;
+    font-size: clamp(0.75rem, 3vw, 0.85rem);
     font-weight:600;
     color:var(--mauve);
     opacity:0.75;
@@ -69,7 +75,7 @@
   /* couple doodle */
   .couple-wrap{
     margin: 6px auto 4px;
-    width:170px;
+    width: clamp(130px, 40vw, 170px);
   }
   .banner-text{
     font-family:'Baloo 2', cursive;
@@ -82,8 +88,8 @@
   .doll-wrap{
     position:absolute;
     top:-18px;
-    right:-22px;
-    width:104px;
+    right:-14px;
+    width: clamp(72px, 22vw, 104px);
     filter: drop-shadow(0 6px 10px rgba(107,74,90,0.15));
     animation: sway 4.5s ease-in-out infinite;
     transform-origin: bottom center;
@@ -102,20 +108,22 @@
 
   .timer-display{
     font-family:'Baloo 2', cursive;
-    font-size:3rem;
+    font-size: clamp(2.1rem, 10vw, 3rem);
     font-weight:700;
     color:var(--mauve);
     background: var(--pink);
     border-radius:20px;
-    padding:14px 10px;
+    padding: clamp(10px, 3.5vw, 14px) clamp(6px, 2vw, 10px);
     margin:14px 0 6px;
-    letter-spacing:2px;
+    letter-spacing:1px;
     box-shadow: inset 0 0 0 3px #fff, 0 4px 0 var(--bubble);
+    word-break: keep-all;
+    white-space: nowrap;
   }
 
   .status-pill{
     display:inline-block;
-    font-size:0.72rem;
+    font-size: clamp(0.66rem, 2.6vw, 0.72rem);
     font-weight:700;
     padding:4px 14px;
     border-radius:999px;
@@ -135,15 +143,17 @@
 
   button{
     font-family:'Baloo 2', cursive;
-    font-size:0.95rem;
+    font-size: clamp(0.85rem, 3.4vw, 0.95rem);
     font-weight:700;
     border:none;
     border-radius:999px;
-    padding:11px 22px;
+    padding: clamp(10px, 3vw, 11px) clamp(16px, 5vw, 22px);
     cursor:pointer;
     color:#fff;
     transition: transform 0.15s ease, filter 0.15s ease;
     box-shadow: 0 4px 0 rgba(0,0,0,0.08);
+    flex: 0 1 auto;
+    touch-action: manipulation;
   }
   button:active{ transform: translateY(3px); box-shadow:none; }
   button:hover{ filter:brightness(1.06); }
@@ -158,12 +168,13 @@
     margin-top:18px;
     min-height:20px;
     font-family:'Baloo 2', cursive;
-    font-size:1.05rem;
+    font-size: clamp(0.9rem, 3.6vw, 1.05rem);
     font-weight:700;
     color:var(--mauve);
     opacity:0;
     transform:translateY(6px);
     transition: opacity 0.4s ease, transform 0.4s ease;
+    padding: 0 4px;
   }
   .message-box.show{
     opacity:1;
@@ -173,7 +184,7 @@
   .message-box .sub{
     display:block;
     font-family:'Quicksand', sans-serif;
-    font-size:0.78rem;
+    font-size: clamp(0.7rem, 2.8vw, 0.78rem);
     font-weight:600;
     opacity:0.7;
     margin-top:3px;
@@ -202,7 +213,7 @@
     pointer-events:none;
     transition:opacity 0.25s ease;
     z-index:50;
-    padding:20px;
+    padding: clamp(16px, 5vw, 20px);
   }
   .overlay.show{
     opacity:1;
@@ -212,8 +223,9 @@
     background:#FFFDFB;
     border-radius:26px;
     border:3px dashed var(--coral);
-    padding:20px 22px 22px;
+    padding: clamp(16px, 5vw, 20px) clamp(18px, 5.5vw, 22px) clamp(18px, 5.5vw, 22px);
     max-width:280px;
+    width:100%;
     text-align:center;
     box-shadow:0 18px 40px var(--shadow);
     transform:translateY(10px) scale(0.95);
@@ -223,7 +235,7 @@
     transform:translateY(0) scale(1);
   }
   .popup svg{
-    width:110px;
+    width: clamp(88px, 26vw, 110px);
     animation: shake 0.5s ease-in-out;
   }
   @keyframes shake{
@@ -235,14 +247,14 @@
   }
   .popup-title{
     font-family:'Baloo 2', cursive;
-    font-size:1.15rem;
+    font-size: clamp(1.05rem, 4vw, 1.15rem);
     font-weight:800;
     color:var(--coral);
     margin:8px 0 2px;
   }
   .popup-sub{
     font-family:'Quicksand', sans-serif;
-    font-size:0.8rem;
+    font-size: clamp(0.75rem, 3vw, 0.8rem);
     font-weight:600;
     color:var(--mauve);
     opacity:0.8;
@@ -250,6 +262,7 @@
   }
   .btn-popup{
     background: linear-gradient(180deg, #FF9DAE, #F26C87);
+    width:100%;
   }
   @media (prefers-reduced-motion: reduce){
     .popup svg{ animation:none; }
@@ -260,26 +273,26 @@
     width:100%;
     max-width:340px;
     background:#FFFDFB;
-    border-radius:32px;
+    border-radius:clamp(22px, 6vw, 32px);
     border:3px dashed var(--pink);
-    padding:32px 26px;
+    padding: clamp(24px, 7vw, 32px) clamp(18px, 6vw, 26px);
     text-align:center;
     box-shadow: 0 18px 40px var(--shadow);
   }
   .login-card svg{
-    width:90px;
+    width: clamp(70px, 22vw, 90px);
     margin-bottom:6px;
   }
   .login-title{
     font-family:'Baloo 2', cursive;
-    font-size:1.7rem;
+    font-size: clamp(1.4rem, 6vw, 1.7rem);
     font-weight:800;
     color:var(--bubble);
     margin:4px 0 2px;
     text-shadow: 1.5px 1.5px 0 var(--pink);
   }
   .login-sub{
-    font-size:0.82rem;
+    font-size: clamp(0.76rem, 3vw, 0.82rem);
     font-weight:600;
     opacity:0.75;
     margin:0 0 20px;
@@ -300,7 +313,7 @@
   .field input{
     width:100%;
     font-family:'Quicksand', sans-serif;
-    font-size:0.9rem;
+    font-size:16px; /* prevents iOS auto-zoom on focus */
     font-weight:600;
     color:var(--mauve);
     background:var(--cream);
@@ -326,7 +339,7 @@
     margin-top:6px;
     background: linear-gradient(180deg, #FF9DAE, #F26C87);
     padding:12px;
-    font-size:1rem;
+    font-size: clamp(0.9rem, 3.6vw, 1rem);
   }
   .login-error{
     min-height:16px;
@@ -339,8 +352,22 @@
   }
   .login-error.show{ opacity:1; }
 
-  .app-wrap{ display:none; }
-  .app-wrap.show{ display:block; }
+  .app-wrap{ display:none; width:100%; display: flex; justify-content:center; }
+  .app-wrap:not(.show){ display:none; }
+  .app-wrap.show{ display:flex; }
+
+  /* small phone tweaks */
+  @media (max-width: 380px){
+    .card{ margin-top:24px; }
+    .doll-wrap{ top:-14px; right:-10px; width: 64px; }
+    .timer-display{ letter-spacing:0px; }
+    .controls{ gap:8px; }
+    button{ padding: 10px 14px; }
+  }
+
+  @media (max-width: 340px){
+    .doll-wrap{ display:none; }
+  }
 </style>
 </head>
 <body>
